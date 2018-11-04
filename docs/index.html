@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bookmarkletter</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      function createUrl(domain, file) {
+        return 'javascript:void((function (){ var s=document.createElement("script");s.src="' + domain + '/' + file + '?"+new Date().getTime();document.body.appendChild(s);return false;})())';
+      }
+      var origin = window.location.origin
+      var files = ["bookmarklet.js"]
+
+      if (origin.match(/http:\/\/localhost/)) {
+        files = ['bookmarklet.js']
+      }
+
+      var ul = document.createElement("ul")
+      for (var file in files) {
+        var a = document.createElement("a")
+        a.href = createUrl(origin, files[file]);
+        a.innerText = 'bookmarklet実行 (' + files[file] + ')'
+        var li = document.createElement("li")
+        li.appendChild(a)
+        ul.appendChild(li)
+      }
+      document.body.appendChild(ul)
+    });
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

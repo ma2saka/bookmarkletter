@@ -1,11 +1,13 @@
 const path = require('path')
 
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+
 module.exports = {
   entry: {
     main: path.resolve(__dirname, './src/', "index.js")
   },
   output: {
-    path: path.resolve(__dirname, './dist/'),
+    path: path.resolve(__dirname, './docs/'),
     publicPath: '/',
     filename: 'bookmarklet.js'
   },
@@ -25,5 +27,8 @@ module.exports = {
   devtool: 'eval',
   devServer: {
     contentBase: './public'
-  }
+  },
+  plugins: [
+    new CopyWebpackPlugin([{ from: './public/', to: './' }], {})
+  ]
 }
